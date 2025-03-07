@@ -102,7 +102,7 @@ jobs:
             -e ${docker_env_plugin_platform}=${platform_version} \
             -v `pwd`/${{ matrix.plugins.path }}:/home/node/kbn/plugins/${{ matrix.plugins.container_path }} \
             ${{ inputs.docker_run_extra_args }} \
-            quay.io/wazuh/${platform}-dev:${platform_version} \
+            quay.io/wazuh/${platform}-dev:${platform_version}.arm \
             bash -c '
               yarn config set registry https://registry.yarnpkg.com;
               cd /home/node/kbn/plugins/${{ matrix.plugins.container_path }} && yarn && ${{ inputs.command }};
