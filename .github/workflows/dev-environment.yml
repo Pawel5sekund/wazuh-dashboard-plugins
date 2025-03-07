@@ -106,6 +106,7 @@ jobs:
             quay.io/wazuh/${platform}-dev:${platform_version}.arm \
             bash -c '
               yarn config set registry https://registry.yarnpkg.com;
+              yarn config set network-timeout 600000 -g;
               cd /home/node/kbn/plugins/${{ matrix.plugins.container_path }} && yarn && ${{ inputs.command }};
             '
 
