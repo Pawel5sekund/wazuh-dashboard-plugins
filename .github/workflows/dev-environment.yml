@@ -67,12 +67,7 @@ jobs:
           ]
 
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        
+    
       - name: Step 01 - Download the plugin's source code
         uses: actions/checkout@v4
         with:
@@ -104,7 +99,7 @@ jobs:
           [ "$platform" = "osd" ] && { docker_env_plugin_platform="OPENSEARCH_DASHBOARDS_VERSION"; };
 
           # Up the environment and run the command
-          docker run -t --rm \
+          docker run --platform linux/arm64 -t --rm \
             -e ${docker_env_plugin_platform}=${platform_version} \
             -v `pwd`/${{ matrix.plugins.path }}:/home/node/kbn/plugins/${{ matrix.plugins.container_path }} \
             ${{ inputs.docker_run_extra_args }} \
